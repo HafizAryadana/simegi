@@ -41,6 +41,17 @@ if (isset($_POST["login"])) {
         $notfound = true;
     }
 }
+
+// cek tombol daftar sudah diklik atau belum
+if (isset($_POST["daftar"])) {
+    // jalankan function register
+
+    if (daftar($_POST) > 0) {
+        $success = true;
+    }else{
+        $failedRegister = true;
+    }
+}
 ?>
 
 
@@ -72,21 +83,21 @@ if (isset($_POST["login"])) {
                     <input type="submit" name="login" value="Masuk" class="btn solid" />
                 </form>
 
-                <form action="#" class="sign-up-form">
+                <form action="" method="post" class="sign-up-form">
                     <h2 class="title">Daftar</h2>
                     <div class="input-field">
                         <i class="fas fa-user"></i>
-                        <input type="text" placeholder="Nama Perusahaan" />
+                        <input type="text" name="nama" placeholder="Nama Perusahaan" />
                     </div>
                     <div class="input-field">
                         <i class="fas fa-envelope"></i>
-                        <input type="email" placeholder="Email" />
+                        <input type="email" name="email" placeholder="Email" />
                     </div>
                     <div class="input-field">
                         <i class="fas fa-lock"></i>
-                        <input type="password" placeholder="Password" />
+                        <input type="password" name="password" placeholder="Password" />
                     </div>
-                    <input type="submit" class="btn" value="Daftar" />
+                    <input type="submit" class="btn" name="daftar" value="Daftar" />
 
                 </form>
             </div>
@@ -130,6 +141,30 @@ if (isset($_POST["login"])) {
 
 </html>
 
+<!-- notifikasi sukses registrasi -->
+<?php if (isset($success)) : ?>
+    <script>
+        Swal.fire({
+            title: "Berhasil",
+            text: "Registrasi Berhasil",
+            icon: "success",
+            button: "OK",
+        })
+    </script>
+<?php endif ?>
+
+<!-- notifikasi sukses registrasi -->
+<?php if (isset($failedRegister)) : ?>
+    <script>
+         Swal.fire({
+            title: "Nama atau email sudah digunakan mohon cari yang lain",
+            icon: "error",
+            button: "OK",
+        })
+    </script>
+<?php endif ?>
+
+
 <!-- gagal login -->
 <?php if (isset($failed)) : ?>
     <script>
@@ -152,7 +187,7 @@ if (isset($_POST["login"])) {
             })
             .then((login_user) => {
                 if (login_user) {
-                    location.href = "../index.php"
+                    location.href = "../user/reg-uttp.html"
                 }
             });
     </script>
