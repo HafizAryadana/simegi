@@ -125,7 +125,7 @@ if (isset($_POST["daftar"])) {
                         Pelayanan tera Dan Tera ulang Pemerintah Kabupaten Banyumas
                     </p>
                     <h3>Sudah memiliki akun ?</h3>
-                    <button class="btn transparent" id="sign-in-btn">
+                    <button> class="btn transparent" id="sign-in-btn">
                         Masuk
                     </button>
                 </div>
