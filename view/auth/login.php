@@ -187,7 +187,7 @@ if (isset($_POST["daftar"])) {
             })
             .then((login_user) => {
                 if (login_user) {
-                    location.href = "../user/reg-uttp.html"
+                    location.href = "../../landingpage.html"
                 }
             });
     </script>
