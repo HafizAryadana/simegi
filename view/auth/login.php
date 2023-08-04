@@ -48,7 +48,7 @@ if (isset($_POST["daftar"])) {
 
     if (daftar($_POST) > 0) {
         $success = true;
-    }else{
+    } else {
         $failedRegister = true;
     }
 }
@@ -156,7 +156,7 @@ if (isset($_POST["daftar"])) {
 <!-- notifikasi sukses registrasi -->
 <?php if (isset($failedRegister)) : ?>
     <script>
-         Swal.fire({
+        Swal.fire({
             title: "Nama atau email sudah digunakan mohon cari yang lain",
             icon: "error",
             button: "OK",
@@ -180,16 +180,21 @@ if (isset($_POST["daftar"])) {
 <!-- notifikasi sukses login user -->
 <?php if (isset($successuser)) : ?>
     <script>
+        let timerIntervalUser
         Swal.fire({
-                title: "Login berhasil",
-                icon: "success",
-                button: "OK",
-            })
-            .then((login_user) => {
-                if (login_user) {
-                    location.href = "../../landingpage.html"
-                }
-            });
+            title: 'Login Berhasil',
+            icon: 'success',
+            timer: 1000,
+            timerProgressBar: false,
+            didOpen: () => {
+                Swal.showLoading()
+            },
+            willClose: () => {
+                clearInterval(timerIntervalUser)
+            }
+        }).then((result) => {
+            location.href = "../user/index.html"
+        })
     </script>
 <?php endif ?>
 
@@ -197,17 +202,21 @@ if (isset($_POST["daftar"])) {
 <!-- notifikasi sukses login admin -->
 <?php if (isset($successadmin)) : ?>
     <script>
+         let timerIntervalAdmin
         Swal.fire({
-                title: "Login berhasil",
-                icon: "success",
-                button: "OK",
-            })
-            .then((login_admin) => {
-                if (login_admin) {
-                    location.href = "../../admin/index.html"
-                }
-
-            });
+            title: 'Login Berhasil',
+            icon: 'success',
+            timer: 1000,
+            timerProgressBar: false,
+            didOpen: () => {
+                Swal.showLoading()
+            },
+            willClose: () => {
+                clearInterval(timerIntervalAdmin)
+            }
+        }).then((result) => {
+            location.href = "../../admin/index.html"
+        })
     </script>
 <?php endif ?>
 
