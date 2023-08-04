@@ -1,3 +1,20 @@
+<?php
+require_once "../../api/api.php";
+require_once "../../session/index.php";
+$registered = 1;
+
+// id user
+$userID = $_SESSION["id"];
+if (isset($_POST["simpan"])) {
+    if (registrasiUTTP($_POST, $userID) == $registered) {
+        $success = true;
+    } else {
+        $failed = true;
+    }
+}
+?>
+
+
 <!DOCTYPE html>
 <!-- Coding By CodingNepal - codingnepalweb.com -->
 <html lang="en">
@@ -40,60 +57,60 @@
         </div>
 
 
-        <form action="#">
+        <form method="post" enctype="multipart/form-data">
             <div class="form first">
                 <div class="details personal">
                     <div class="fields">
                         <div class="input-field">
                             <label>ID UTTP</label>
-                            <input type="number" placeholder="Masukkan ID" required>
+                            <input type="number" name="id_uttp" placeholder="Masukkan ID" required>
                         </div>
                     </div>
                     <div class="fields">
                         <div class="input-field">
                             <label>UTTP Besaran</label>
-                            <select required>
+                            <select name="besaran_uttp" required>
                                 <option disabled selected>Pilih Jenis</option>
-                                <option>PANJANG</option>
-                                <option>WAKTU</option>
-                                <option>VOLUME</option>
-                                <option>MASSA</option>
-                                <option>KADAR AIR</option>
-                                <option>ARUS</option>
-                                <option>ENERGI LISTRIK</option>
+                                <option value="panjang">PANJANG</option>
+                                <option value="waktu">WAKTU</option>
+                                <option value="volume">VOLUME</option>
+                                <option value="massa">MASSA</option>
+                                <option value="kadar air">KADAR AIR</option>
+                                <option value="arus">ARUS</option>
+                                <option value="energi listrik">ENERGI LISTRIK</option>
                             </select>
                         </div>
                         <div class="input-field">
                             <label>Jenis UTTP</label>
-                            <input type="text" placeholder="Jenis UTTP" required>
+                            <input type="text" name="jenis_uttp" placeholder="Jenis UTTP" required>
                         </div>
                         <div class="input-field">
                             <label>Range Kapasitas</label>
-                            <input type="text" placeholder="Range Kaapasitas" required>
+                            <input type="text" name="range_kapasitas" placeholder="Range Kaapasitas" required>
                         </div>
 
                         <div class="input-field">
                             <label>Merk</label>
-                            <input type="text" placeholder="Masukkan Merk" required>
+                            <input type="text" name="merk" placeholder="Masukkan Merk" required>
                         </div>
                         <div class="input-field">
                             <label>Type</label>
-                            <input type="text" placeholder="Masukkan Type" required>
+                            <input type="text" name="tipe" placeholder="Masukkan Type" required>
                         </div>
 
                         <div class="input-field">
                             <label>No Seri</label>
-                            <input type="number" placeholder="Masukkan No Seri" required>
+                            <input type="number" name="no_seri" placeholder="Masukkan No Seri" required>
                         </div>
                         <div class="input-file">
                             <div class="mb-2"><label>Foto UTTP dan Merk/Seri yang ada pada alat ukur</label></div>
-                            <input type="file" id="myFile" name="filename">
+                            <input type="file" id="myFile" name="berkas">
                         </div>
                     </div>
                 </div>
 
 
-                <button class="nextBtn">
+                <button class="nextBtn" name="simpan">
                     <span class="btnText">Simpan</span>
                     <i class="uil uil-navigator"></i>
                 </button>
@@ -104,6 +121,30 @@
     </div>
 
     <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
-
 </html>
+
+<!-- notifikasi sukses -->
+<?php if (isset($success)) : ?>
+    <script>
+        Swal.fire({
+            title: "Berhasil",
+            text: "UTTP berhasil didaftarkan",
+            icon: "success",
+            button: "OK",
+        })
+    </script>
+<?php endif ?>
+
+<!-- notifikasi gagal -->
+<?php if (isset($failed)) : ?>
+    <script>
+        Swal.fire({
+            title: "Gagal",
+            text: "UTTP gagal didaftarkan",
+            icon: "error",
+            button: "OK",
+        })
+    </script>
+<?php endif ?>
