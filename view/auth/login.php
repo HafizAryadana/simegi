@@ -1,5 +1,6 @@
 <?php
 require_once "../../api/api.php";
+require_once "../../session/index.php";
 
 // apakah tombol login telah di klik
 if (isset($_POST["login"])) {
@@ -25,6 +26,7 @@ if (isset($_POST["login"])) {
             if ($data["level"] === 'user') {
                 // buat session
                 $_SESSION["id"] = $data["id"];
+                // $_SESSION["id"] = $data["id"];
                 $_SESSION["login_user"] = true;
                 $successuser = true;
             } else {
@@ -193,7 +195,7 @@ if (isset($_POST["daftar"])) {
                 clearInterval(timerIntervalUser)
             }
         }).then((result) => {
-            location.href = "../user/index.html"
+            location.href = "../user/index.php"
         })
     </script>
 <?php endif ?>
